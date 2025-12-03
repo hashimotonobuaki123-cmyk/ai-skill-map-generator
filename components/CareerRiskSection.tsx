@@ -18,6 +18,7 @@ import { ErrorAlert } from "@/components/ui/error-alert";
 import { postJson } from "@/lib/apiClient";
 import { logUsage } from "@/lib/usageLogger";
 
+// Chart.js でレーダーチャートを使うための登録
 ChartJS.register(
   RadialLinearScale,
   PointElement,
@@ -56,7 +57,7 @@ export function CareerRiskSection({ result }: CareerRiskSectionProps) {
     }
   };
 
-  // Chart.js の型定義と readonly 配列の相性が良くないため、ここは any として扱う
+  // Chart.js の型と readonly 配列の相性が良くないため、ここは any で扱う
   const chartData: any =
     risk &&
     {
@@ -126,6 +127,8 @@ export function CareerRiskSection({ result }: CareerRiskSectionProps) {
         {risk && chartData && (
           <div className="space-y-3">
             <div className="w-full max-w-md mx-auto">
+              {/* 型の都合で any を使っているため、ここだけ型チェックを無視する */}
+              {/* @ts-ignore */}
               <Radar data={chartData} options={chartOptions} />
             </div>
             <div>
@@ -146,5 +149,3 @@ export function CareerRiskSection({ result }: CareerRiskSectionProps) {
     </Card>
   );
 }
-
-
