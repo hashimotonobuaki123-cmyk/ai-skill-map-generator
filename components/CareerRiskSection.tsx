@@ -11,7 +11,8 @@ import {
   LineElement,
   Filler,
   Tooltip,
-  Legend
+  Legend,
+  type ChartData
 } from "chart.js";
 import { Button } from "@/components/ui/button";
 import { ErrorAlert } from "@/components/ui/error-alert";
@@ -56,21 +57,21 @@ export function CareerRiskSection({ result }: CareerRiskSectionProps) {
     }
   };
 
-  const chartData =
-    risk &&
-    ({
-      labels: ["陳腐化リスク", "属人化リスク", "自動化リスク"],
-      datasets: [
-        {
-          label: "キャリアリスク",
-          data: [risk.obsolescence, risk.busFactor, risk.automation],
-          backgroundColor: "rgba(248, 113, 113, 0.2)",
-          borderColor: "rgba(248, 113, 113, 1)",
-          borderWidth: 2,
-          pointBackgroundColor: "rgba(248, 113, 113, 1)"
-        }
-      ]
-    } as const);
+  const chartData: ChartData<"radar"> | null = risk
+    ? {
+        labels: ["陳腐化リスク", "属人化リスク", "自動化リスク"],
+        datasets: [
+          {
+            label: "キャリアリスク",
+            data: [risk.obsolescence, risk.busFactor, risk.automation],
+            backgroundColor: "rgba(248, 113, 113, 0.2)",
+            borderColor: "rgba(248, 113, 113, 1)",
+            borderWidth: 2,
+            pointBackgroundColor: "rgba(248, 113, 113, 1)"
+          }
+        ]
+      }
+    : null;
 
   const chartOptions = {
     responsive: true,
@@ -122,10 +123,10 @@ export function CareerRiskSection({ result }: CareerRiskSectionProps) {
 
         {error && <ErrorAlert message={error} />}
 
-        {risk && (
+        {risk && chartData && (
           <div className="space-y-3">
             <div className="w-full max-w-md mx-auto">
-              <Radar data={chartData!} options={chartOptions} />
+              <Radar data={chartData} options={chartOptions} />
             </div>
             <div>
               <p className="text-xs font-semibold text-muted-foreground">
