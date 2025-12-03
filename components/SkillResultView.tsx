@@ -11,13 +11,9 @@ import { SkillChart } from "@/components/SkillChart";
 import { RoadmapView } from "@/components/RoadmapView";
 import { ComparisonChart } from "@/components/ComparisonChart";
 import { Button } from "@/components/ui/button";
-import { SkillCoachChat } from "@/components/SkillCoachChat";
 import { SkillStorySection } from "@/components/SkillStorySection";
 import { JobMatchSection } from "@/components/JobMatchSection";
 import { CareerRiskSection } from "@/components/CareerRiskSection";
-import { OneOnOnePracticeSection } from "@/components/OneOnOnePracticeSection";
-import { TimeSimulatorSection } from "@/components/TimeSimulatorSection";
-import { TodayTaskSection } from "@/components/TodayTaskSection";
 import { ErrorAlert } from "@/components/ui/error-alert";
 import { postJson } from "@/lib/apiClient";
 
@@ -78,7 +74,7 @@ export function SkillResultView({
   previousCategories
 }: SkillResultViewProps) {
   const [activeTab, setActiveTab] = useState<
-    "overview" | "learning" | "career" | "interview" | "export"
+    "overview" | "learning" | "career" | "export"
   >("overview");
   const nextSkills =
     result.nextSkills ??
@@ -176,7 +172,6 @@ export function SkillResultView({
         { id: "overview", label: "概要" },
         { id: "learning", label: "学習計画" },
         { id: "career", label: "キャリア & 求人" },
-        { id: "interview", label: "面接・1on1" },
         { id: "export", label: "エクスポート" }
       ].map((tab) => {
         const isActive = activeTab === tab.id;
@@ -361,12 +356,10 @@ export function SkillResultView({
 
       {activeTab === "learning" && (
         <div className="space-y-6">
-          <TodayTaskSection result={result} />
           <RoadmapView
             roadmap30={result.roadmap30 ?? ""}
             roadmap90={result.roadmap90 ?? ""}
           />
-          <TimeSimulatorSection result={result} />
         </div>
       )}
 
@@ -374,13 +367,6 @@ export function SkillResultView({
         <div className="space-y-6">
           <CareerRiskSection result={result} />
           <JobMatchSection result={result} />
-        </div>
-      )}
-
-      {activeTab === "interview" && (
-        <div className="space-y-6">
-          <OneOnOnePracticeSection result={result} />
-          <SkillCoachChat result={result} />
         </div>
       )}
 

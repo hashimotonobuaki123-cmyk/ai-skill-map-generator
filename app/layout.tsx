@@ -35,6 +35,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     ダッシュボード
                   </a>
                   <a
+                    href="/about"
+                    className="px-3 py-1 rounded-full hover:bg-slate-100 transition-colors"
+                  >
+                    このアプリについて
+                  </a>
+                  <a
                     href="/portfolio"
                     className="px-3 py-1 rounded-full hover:bg-slate-100 transition-colors"
                   >
