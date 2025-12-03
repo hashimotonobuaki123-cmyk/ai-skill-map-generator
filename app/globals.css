@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #020617; /* slate-950 に近い濃いテキスト色 */
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+p {
+  line-height: 1.8;
+}
+
+
