@@ -10,6 +10,11 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: "https://example.com"
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: "dummy-anon-key"
+      OPENAI_API_KEY: "dummy-openai-key"
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,5 +33,3 @@ jobs:
 
       - name: Run unit tests
         run: npm run test
-
-
