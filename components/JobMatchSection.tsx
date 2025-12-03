@@ -81,7 +81,8 @@ export function JobMatchSection({ result }: JobMatchSectionProps) {
   const fillJobSample = () => {
     const next = (sampleIndex + 1) % jobSamples.length;
     setSampleIndex(next);
-    setJdText(jobSamples[next]);
+    // TypeScript 上は undefined になる可能性があるので空文字をフォールバック
+    setJdText(jobSamples[next] ?? "");
   };
 
   const handleMatch = async () => {
