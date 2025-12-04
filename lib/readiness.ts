@@ -2,11 +2,11 @@ import type { SkillCategories, ReadinessScoreResult } from "@/types/skill";
 
 export interface ReadinessParams {
   categories: SkillCategories;
-  jobMatchScore?: number;
-  riskObsolescence?: number;
-  riskBusFactor?: number;
-  riskAutomation?: number;
-  prepScore?: number;
+  jobMatchScore?: number | undefined;
+  riskObsolescence?: number | undefined;
+  riskBusFactor?: number | undefined;
+  riskAutomation?: number | undefined;
+  prepScore?: number | undefined;
 }
 
 // 転職準備スコア計算ロジックを純粋関数として切り出し

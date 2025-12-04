@@ -96,13 +96,13 @@ export function SkillStorySection({ result }: SkillStorySectionProps) {
             <div className="relative">
               {/* Quote decoration */}
               <div className="absolute -left-2 -top-2 text-4xl text-indigo-200 font-serif">
-                "
+                &ldquo;
               </div>
               <p className="whitespace-pre-wrap text-sm leading-relaxed text-slate-700 pl-6 md:columns-2 md:gap-8">
                 {story}
               </p>
               <div className="absolute -right-2 bottom-0 text-4xl text-indigo-200 font-serif">
-                "
+                &rdquo;
               </div>
             </div>
             

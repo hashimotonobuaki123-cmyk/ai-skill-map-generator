@@ -19,8 +19,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
-    "exactOptionalPropertyTypes": true,
-    "noPropertyAccessFromIndexSignature": true,
     "forceConsistentCasingInFileNames": true,
     
     "plugins": [{ "name": "next" }],

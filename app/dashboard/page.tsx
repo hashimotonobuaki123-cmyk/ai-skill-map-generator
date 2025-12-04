@@ -78,7 +78,7 @@ export default function DashboardPage() {
     if (!latest) return { text: "", emoji: "" };
     const categories = latest.categories ?? {};
     const entries = Object.entries(categories).filter(
-      ([, v]) => v != null
+      ([, v]) => v !== null && v !== undefined
     ) as [string, number][];
     if (entries.length === 0) return { text: "", emoji: "" };
     const first = entries.sort((a, b) => b[1] - a[1])[0];
@@ -158,7 +158,7 @@ export default function DashboardPage() {
             );
 
             const entries = Object.entries(categories).filter(
-              ([, v]) => v != null
+              ([, v]) => v !== null && v !== undefined
             ) as [string, number][];
             const top =
               entries.length > 0
@@ -212,7 +212,7 @@ export default function DashboardPage() {
                       {/* ミニスキルバー */}
                       <div className="flex gap-1 mt-3">
                         {Object.entries(categories)
-                          .filter(([, v]) => v != null)
+                          .filter(([, v]) => v !== null && v !== undefined)
                           .map(([key, value]) => (
                             <div
                               key={key}
