@@ -164,7 +164,7 @@ export function SkillResultView({
 
   const renderTabs = () => (
     <div
-      className="flex flex-wrap gap-2 border-b pb-2 mb-4 text-xs md:text-sm"
+      className="flex gap-2 border-b pb-2 mb-4 text-xs md:text-sm overflow-x-auto flex-nowrap -mx-2 px-2 md:mx-0 md:px-0"
       role="tablist"
       aria-label="スキルマップ結果のセクション切り替え"
     >

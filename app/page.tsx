@@ -22,6 +22,49 @@ export default function HomePage() {
           「何から始めればいいか」を、一緒にゆっくり整理していきましょう。
         </p>
       </section>
+      <section className="space-y-3">
+        <p className="text-xs font-semibold text-slate-700">
+          まずはこの 3 ステップだけで OK です。
+        </p>
+        <div className="grid gap-3 sm:grid-cols-3">
+          <div className="rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm">
+            <p className="text-[11px] font-semibold text-sky-700 mb-1">
+              STEP 1
+            </p>
+            <p className="text-sm font-semibold text-slate-900">
+              ゴールを選ぶ
+            </p>
+            <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+              「フロントエンド特化」「フルスタック」など、
+              いま近づきたいキャリアのイメージを一つだけ選びます。
+            </p>
+          </div>
+          <div className="rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm">
+            <p className="text-[11px] font-semibold text-sky-700 mb-1">
+              STEP 2
+            </p>
+            <p className="text-sm font-semibold text-slate-900">
+              スキル・職務経歴を入力
+            </p>
+            <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+              いままでやってきたことを日本語でそのまま書きます。
+              サンプル文をベースに少し書き換えるだけでも大丈夫です。
+            </p>
+          </div>
+          <div className="rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm">
+            <p className="text-[11px] font-semibold text-sky-700 mb-1">
+              STEP 3
+            </p>
+            <p className="text-sm font-semibold text-slate-900">
+              結果で全体像をつかむ
+            </p>
+            <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+              スキルマップと転職準備スコアを見て、
+              どこを伸ばせば良いか・どんな求人が合いそうかを一緒に確認します。
+            </p>
+          </div>
+        </div>
+      </section>
       <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-start">
         <div className="space-y-3 text-xs text-slate-700">
           <p className="font-semibold text-slate-900">このツールでできること</p>

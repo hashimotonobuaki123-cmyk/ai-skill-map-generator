@@ -62,6 +62,30 @@
 
 ---
 
+### 画面イメージ（スクリーンショット）
+
+実際の UI は次のような構成になっています（`npm run screenshot` で自動生成した画像を使用）。
+
+- **ホーム（スキル入力と 3 ステップ導線）**
+
+  ![Home](public/screenshots/home.png)
+
+- **スキルマップ結果（概要タブ）**
+
+  ![Result overview](public/screenshots/result-overview.png)
+
+- **キャリア & 求人タブ（求人マッチング＋キャリアリスク）**
+
+  ![Result career](public/screenshots/result-career.png)
+
+- **このアプリについて / ダッシュボード など**
+
+  ![About](public/screenshots/about.png)
+
+README 上での見え方を更新したいときは、ローカルで `npm run dev` を起動したうえで `npm run screenshot` を実行し、生成された `public/screenshots/*.png` をコミットすることで反映できます。
+
+---
+
 ### 技術構成（ハイレベル）
 
 - **フロントエンド**

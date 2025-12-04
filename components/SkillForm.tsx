@@ -66,6 +66,13 @@ export function SkillForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    if (!userId) {
+      setError(
+        "スキルマップを保存して振り返るには、右上の「ログイン」からサインアップ / ログインしてください。"
+      );
+      return;
+    }
     if (!text.trim()) {
       setError("スキル・職務経歴を入力してください。");
       return;
