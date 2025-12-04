@@ -123,8 +123,13 @@ export function SkillForm() {
           このツールでスキルマップを生成・保存するには、右上の「ログイン」から
           サインアップ / ログインしてください。
         </p>
-        <Button asChild size="sm" className="mt-1">
-          <Link href="/auth/login">ログイン / 新規登録画面を開く</Link>
+        <Button
+          type="button"
+          size="sm"
+          className="mt-1"
+          onClick={() => router.push("/auth/login")}
+        >
+          ログイン / 新規登録画面を開く
         </Button>
       </div>
     );
