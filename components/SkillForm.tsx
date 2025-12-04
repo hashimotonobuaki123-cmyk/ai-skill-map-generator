@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ErrorAlert } from "@/components/ui/error-alert";
@@ -16,6 +17,7 @@ export function SkillForm() {
   const [error, setError] = useState<string | null>(null);
   const [sampleIndex, setSampleIndex] = useState(0);
   const [userId, setUserId] = useState<string | null>(null);
+  const [userLoaded, setUserLoaded] = useState(false);
   const router = useRouter();
 
   const samples: string[] = [
@@ -60,6 +62,9 @@ export function SkillForm() {
       })
       .catch(() => {
         setUserId(null);
+      })
+      .finally(() => {
+        setUserLoaded(true);
       });
   }, []);
 
@@ -69,7 +74,7 @@ export function SkillForm() {
 
     if (!userId) {
       setError(
-        "スキルマップを保存して振り返るには、右上の「ログイン」からサインアップ / ログインしてください。"
+        "スキルマップを生成するには、右上の「ログイン」からサインアップ / ログインしてください。"
       );
       return;
     }
@@ -99,6 +104,31 @@ export function SkillForm() {
       setLoading(false);
     }
   };
+
+  // ログイン確認中
+  if (!userLoaded) {
+    return (
+      <div className="text-xs text-muted-foreground">
+        ログイン状態を確認しています…
+      </div>
+    );
+  }
+
+  // 未ログイン時はフォーム全体をロック
+  if (!userId) {
+    return (
+      <div className="space-y-3 text-xs text-slate-700">
+        <p className="font-semibold text-slate-900">ログインが必要です</p>
+        <p className="leading-relaxed">
+          このツールでスキルマップを生成・保存するには、右上の「ログイン」から
+          サインアップ / ログインしてください。
+        </p>
+        <Button asChild size="sm" className="mt-1">
+          <Link href="/auth/login">ログイン / 新規登録画面を開く</Link>
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">

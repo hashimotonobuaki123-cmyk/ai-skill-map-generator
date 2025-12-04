@@ -12,11 +12,13 @@ export default function AuthLoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setInfo(null);
 
     if (!email.trim() || !password.trim()) {
       setError("メールアドレスとパスワードを入力してください。");
@@ -52,6 +54,35 @@ export default function AuthLoginPage() {
         mode === "login"
           ? "ログインに失敗しました。メールアドレスとパスワードを確認してください。"
           : "新規登録に失敗しました。入力内容を確認し、時間をおいて再度お試しください。"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetPassword = async () => {
+    setError(null);
+    setInfo(null);
+
+    if (!email.trim()) {
+      setError("先にパスワードを再設定したいメールアドレスを入力してください。");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const supabase = getSupabaseBrowserClient();
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/reset`
+      });
+      if (error) {
+        throw error;
+      }
+      setInfo("パスワード再設定用のメールを送信しました。メールボックスを確認してください。");
+    } catch (e) {
+      console.error(e);
+      setError(
+        "パスワード再設定メールの送信に失敗しました。時間をおいてから、もう一度お試しください。"
       );
     } finally {
       setLoading(false);
@@ -117,6 +148,11 @@ export default function AuthLoginPage() {
         </div>
 
         {error && <ErrorAlert message={error} />}
+        {info && !error && (
+          <p className="text-[11px] text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-md px-2 py-1">
+            {info}
+          </p>
+        )}
 
         <Button type="submit" disabled={loading} className="w-full mt-1">
           {loading
@@ -128,6 +164,27 @@ export default function AuthLoginPage() {
             : "新規登録してログイン"}
         </Button>
       </form>
+
+      <div className="space-y-1 text-[11px] text-slate-600">
+        <button
+          type="button"
+          onClick={handleResetPassword}
+          className="underline underline-offset-2 hover:text-slate-900"
+          disabled={loading}
+        >
+          パスワードを忘れた場合はこちら（再設定メールを送信）
+        </button>
+        <p>
+          アカウントとスキルマップを削除したい場合は{" "}
+          <a
+            href="/auth/delete"
+            className="underline underline-offset-2 hover:text-slate-900"
+          >
+            アカウント削除ページ
+          </a>
+          を開いてください。
+        </p>
+      </div>
     </div>
   );
 }

@@ -46,6 +46,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   >
                     ポートフォリオ整理
                   </a>
+                  <a
+                    href="/legal"
+                    className="px-3 py-1 rounded-full hover:bg-slate-100 transition-colors"
+                  >
+                    利用について
+                  </a>
                 </nav>
                 <AuthButton />
               </div>
@@ -76,6 +82,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   className="whitespace-nowrap px-3 py-1 rounded-full bg-slate-50 hover:bg-slate-100 transition-colors"
                 >
                   ポートフォリオ整理
+                </a>
+                <a
+                  href="/legal"
+                  className="whitespace-nowrap px-3 py-1 rounded-full bg-slate-50 hover:bg-slate-100 transition-colors"
+                >
+                  利用について
                 </a>
               </nav>
             </div>

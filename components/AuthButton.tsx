@@ -40,11 +40,16 @@ export function AuthButton() {
     return null;
   }
 
+  const displayEmail =
+    user?.email && user.email.length > 22
+      ? `${user.email.slice(0, 19)}...`
+      : user?.email ?? "ユーザー";
+
   return (
     <div className="flex items-center gap-2 text-xs">
       {user && (
-        <span className="hidden md:inline text-slate-500">
-          サインイン中: {user.email ?? "ユーザー"}
+        <span className="inline-flex max-w-[140px] items-center rounded-full bg-slate-100 px-2 py-1 text-[11px] text-slate-600 truncate">
+          ログイン中: {displayEmail}
         </span>
       )}
       {user ? (

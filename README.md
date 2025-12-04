@@ -1,7 +1,7 @@
 ## AI Skill Map Generator
 
 若手 Web エンジニアの「初めての転職」を想定した、AI ベースのスキルマップ・キャリアコーチングツールです。  
-スキル・職務経歴を入力すると、スキルマップ / 学習ロードマップ / 求人マッチング / 面接練習 / ポートフォリオ整理まで一通りサポートします。
+スキル・職務経歴を入力すると、スキルマップ / 学習ロードマップ / 求人マッチング / ポートフォリオ整理まで一通りサポートします。
 
 この README は、**採用担当・エンジニアの方に向けて「このプロジェクトで何ができるか / どんな力があるか」を短時間で掴んでもらうこと**を意図して構成しています。
 
@@ -64,7 +64,7 @@
 
 ### 画面イメージ（スクリーンショット）
 
-実際の UI は次のような構成になっています（`npm run screenshot` で自動生成した画像を使用）。
+UI の雰囲気が 1〜2 枚で伝わるように、代表的な画面だけを載せています（`npm run screenshot` で自動生成した画像を使用）。
 
 - **ホーム（スキル入力と 3 ステップ導線）**
 
@@ -78,11 +78,20 @@
 
   ![Result career](public/screenshots/result-career.png)
 
-- **このアプリについて / ダッシュボード など**
+- **このアプリについて**
 
   ![About](public/screenshots/about.png)
 
-README 上での見え方を更新したいときは、ローカルで `npm run dev` を起動したうえで `npm run screenshot` を実行し、生成された `public/screenshots/*.png` をコミットすることで反映できます。
+スクリーンショットを撮り直したい場合は、ローカルで `npm run dev` を起動したうえで `npm run screenshot` を実行し、生成された `public/screenshots/*.png` をコミットしてください。
+
+---
+
+### ドキュメント
+
+- 詳細な機能仕様: `docs/spec.md`
+- 英語版サマリ: `docs/spec.en.md`
+- API の入出力サマリ: `docs/api.md`
+- 設計意図・今後の改善メモ: `docs/design-notes.md`
 
 ---
 
@@ -151,7 +160,10 @@ README 上での見え方を更新したいときは、ローカルで `npm run 
 
 - **テスト**
   - `lib/readiness.test.ts`（Vitest）で `high` / `medium` / `low` の 3 パターンをユニットテスト。
-  - `tests/e2e/basic-flow.spec.ts`（Playwright）で、ホーム画面〜フォーム表示までの基本フローを自動チェック。
+  - `tests/e2e/basic-flow.spec.ts` / `tests/e2e/screenshot.spec.ts`（Playwright）で、基本フローとスクリーンショット取得を自動化（ローカル・任意実行）。
+
+- **CI（継続的インテグレーション）**
+  - GitHub Actions（`.github/workflows/ci.yml`）で、`npm run build` と `npm run test`（readiness のユニットテスト）を自動実行し、ビルドと主要なロジックが常に通る状態を保つようにしています。
 
 - **ログ・運用**
   - `usage_logs` テーブルと `lib/usageLogger.ts` を用意し、  
@@ -361,3 +373,12 @@ npm run screenshot
 を意識しています。
 
 もしコードや設計の意図について詳しくご覧になりたい場合は、`lib/`, `app/api/`, `components/` 配下のコメントや型定義も含めてチェックしていただけると嬉しいです。
+
+---
+
+### 制約・注意点（利用者向け）
+
+- このアプリは個人のポートフォリオ用途であり、商用サービスとしての提供を前提としていません。
+- 入力されたデータは Supabase（Postgres）上に保存されますが、第三者への提供は行いません。
+- スキルマップの保存・履歴表示はログインユーザーのみ対象です（未ログイン時は生成自体ができません）。
+- パスワードの忘失やアカウント削除については `/auth/reset` と `/auth/delete` から自己対応できるようにしています。
