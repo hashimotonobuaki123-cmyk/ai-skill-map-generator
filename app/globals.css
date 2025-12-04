@@ -255,3 +255,137 @@ select:focus {
 .tooltip-trigger:hover .tooltip {
   @apply visible opacity-100;
 }
+
+/* ============================
+   スクロールアニメーション
+   ============================ */
+
+/* スムーズスクロール */
+html {
+  scroll-behavior: smooth;
+}
+
+/* スクロールで表示されるアニメーション */
+@keyframes scrollReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-reveal {
+  opacity: 0;
+  animation: scrollReveal 0.6s ease-out forwards;
+  animation-play-state: paused;
+}
+
+.scroll-reveal.is-visible {
+  animation-play-state: running;
+}
+
+/* ============================
+   インタラクティブ要素
+   ============================ */
+
+/* リンクホバーアンダーライン */
+.link-underline {
+  @apply relative;
+}
+
+.link-underline::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-sky-500 transition-all duration-300;
+}
+
+.link-underline:hover::after {
+  @apply w-full;
+}
+
+/* ボタンリップルエフェクト */
+.ripple {
+  @apply relative overflow-hidden;
+}
+
+.ripple::after {
+  content: '';
+  @apply absolute inset-0 bg-white/30 scale-0 rounded-full transition-transform duration-500;
+}
+
+.ripple:active::after {
+  @apply scale-150;
+  transition: transform 0s;
+}
+
+/* グロー効果 */
+.glow-on-hover {
+  @apply relative;
+}
+
+.glow-on-hover::before {
+  content: '';
+  @apply absolute -inset-1 bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500 rounded-xl opacity-0 blur-lg transition-opacity duration-300 -z-10;
+}
+
+.glow-on-hover:hover::before {
+  @apply opacity-50;
+}
+
+/* ============================
+   カスタムスクロールバー
+   ============================ */
+
+/* Webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full transition-colors;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+/* ============================
+   セレクション
+   ============================ */
+
+::selection {
+  @apply bg-sky-200 text-sky-900;
+}
+
+/* ============================
+   アクセシビリティ
+   ============================ */
+
+/* フォーカスリングの改善 */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-sky-500;
+}
+
+/* モーション軽減対応 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
