@@ -127,6 +127,8 @@
 - **ESLint** + **Prettier** (コード品質)
 - **GitHub Actions** (CI/CD)
 
+テスト戦略の詳細は [docs/testing.md](docs/testing.md) を参照してください。
+
 ---
 
 ## 🏗 Architecture
