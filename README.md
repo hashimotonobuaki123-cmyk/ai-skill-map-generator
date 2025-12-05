@@ -1,7 +1,9 @@
 ## AI Skill Map Generator
 
-[![Build Status](https://github.com/your-username/ai-skill-map-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/ai-skill-map-generator/actions/workflows/ci.yml)
-[![Test](https://img.shields.io/badge/test-vitest%20%2B%20playwright-6E9F18)](https://vitest.dev/)
+**🚀 AI-powered career coaching tool for engineers: skill assessment, learning roadmap, job matching & interview practice**
+
+[![CI](https://github.com/hashimotonobuaki123-cmyk/ai-skill-map-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/hashimotonobuaki123-cmyk/ai-skill-map-generator/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/hashimotonobuaki123-cmyk/ai-skill-map-generator/branch/main/graph/badge.svg)](https://codecov.io/gh/hashimotonobuaki123-cmyk/ai-skill-map-generator)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-Postgres-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com/)

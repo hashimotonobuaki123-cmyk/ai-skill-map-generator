@@ -1,39 +1,39 @@
 {
   "name": "ai-skill-map-generator",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest lib/*.test.ts",
+    "test": "vitest run lib/*.test.ts",
+    "test:coverage": "vitest run lib/*.test.ts --coverage",
     "test:e2e": "playwright test",
     "screenshot": "PLAYWRIGHT_BASE_URL=http://localhost:3000 playwright test tests/e2e/screenshot.spec.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
     "chart.js": "^4.4.6",
-    "react-chartjs-2": "^5.3.0",
     "next": "15.0.0-canary.0",
     "openai": "^4.73.0",
-    "zod": "^3.23.8",
     "react": "19.0.0-rc-f994737d14-20240522",
-    "react-dom": "19.0.0-rc-f994737d14-20240522"
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "19.0.0-rc-f994737d14-20240522",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.0",
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@vitest/coverage-v8": "^2.1.9",
     "autoprefixer": "^10.4.20",
     "eslint": "8.57.1",
     "eslint-config-next": "15.0.0-canary.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.6.3",
-    "vitest": "^2.1.5",
-    "@playwright/test": "^1.49.0"
+    "vitest": "^2.1.5"
   }
 }
-
-

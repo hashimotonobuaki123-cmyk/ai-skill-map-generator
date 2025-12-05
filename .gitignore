@@ -4,3 +4,7 @@ node_modules
 .vscode
 .DS_Store
 .vercel
+
+# Coverage
+coverage/
+*.lcov
