@@ -191,6 +191,63 @@ export default async function UsageAdminPage() {
           </table>
         </div>
       </section>
+
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold">直近のイベント一覧（最新 50 件）</h2>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          いつ・どのイベントが発生したかをざっと確認するためのテーブルです。meta カラムには、必要に応じてページやIDなどの追加情報を載せられます（実運用では PII を含めない前提）。
+        </p>
+        <div className="overflow-x-auto rounded-lg border bg-white">
+          <table className="min-w-full text-xs">
+            <thead className="bg-slate-50">
+              <tr>
+                <th className="px-4 py-2 text-left font-semibold text-slate-700">
+                  発生日時
+                </th>
+                <th className="px-4 py-2 text-left font-semibold text-slate-700">
+                  イベント名
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={2}
+                    className="px-4 py-6 text-center text-sm text-muted-foreground"
+                  >
+                    まだ usage_logs のデータがありません。
+                  </td>
+                </tr>
+              ) : (
+                rows.slice(0, 50).map((row, idx) => {
+                  const createdAt = row.created_at
+                    ? new Date(row.created_at)
+                    : null;
+                  return (
+                    <tr key={`${row.created_at}-${row.event}-${idx}`} className="border-t">
+                      <td className="px-4 py-1.5 text-xs text-slate-800 tabular-nums">
+                        {createdAt
+                          ? createdAt.toLocaleString("ja-JP", {
+                              year: "numeric",
+                              month: "2-digit",
+                              day: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit"
+                            })
+                          : "-"}
+                      </td>
+                      <td className="px-4 py-1.5 text-xs font-medium text-slate-900">
+                        {row.event ?? "unknown"}
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   );
 }
