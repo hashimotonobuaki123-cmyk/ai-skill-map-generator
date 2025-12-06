@@ -113,6 +113,10 @@ export default async function UsageAdminPage() {
                     className="px-4 py-6 text-center text-sm text-muted-foreground"
                   >
                     まだ usage_logs のデータがありません。
+                    <br />
+                    例: <code>page_home_view</code>,{" "}
+                    <code>generate_skill_map_clicked</code>,{" "}
+                    <code>job_match_run</code> などのイベントがここに貯まります。
                   </td>
                 </tr>
               ) : (
@@ -162,6 +166,8 @@ export default async function UsageAdminPage() {
                     className="px-4 py-6 text-center text-sm text-muted-foreground"
                   >
                     直近 7 日間のデータがありません。
+                    <br />
+                    ホーム画面の表示や診断実行などの操作が増えると、ここに日別のカウントが並びます。
                   </td>
                 </tr>
               ) : (
@@ -217,6 +223,8 @@ export default async function UsageAdminPage() {
                     className="px-4 py-6 text-center text-sm text-muted-foreground"
                   >
                     まだ usage_logs のデータがありません。
+                    <br />
+                    画面遷移やボタンクリック時に <code>logUsage()</code> を呼び出すと、ここに最新 50 件が時系列で表示されます。
                   </td>
                 </tr>
               ) : (
