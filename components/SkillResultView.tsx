@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { SkillStorySection } from "@/components/SkillStorySection";
 import { JobMatchSection } from "@/components/JobMatchSection";
 import { CareerRiskSection } from "@/components/CareerRiskSection";
+import { OneOnOnePracticeSection } from "@/components/OneOnOnePracticeSection";
 import { ErrorAlert } from "@/components/ui/error-alert";
 import { postJson } from "@/lib/apiClient";
 
@@ -474,6 +475,7 @@ export function SkillResultView({
         <div className="space-y-6 animate-fade-in">
           <CareerRiskSection result={result} />
           <JobMatchSection result={result} />
+          <OneOnOnePracticeSection result={result} />
         </div>
       )}
 
