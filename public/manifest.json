@@ -1,8 +1,10 @@
 {
+  "id": "/",
   "name": "AI Skill Map Generator",
   "short_name": "Skill Map",
   "description": "AI がスキルを分析し、学習ロードマップを自動生成するツール",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0ea5e9",

@@ -9,9 +9,12 @@
 
 > 🎯 An AI-powered skill mapping and career coaching tool for early-career web engineers
 
-Enter your skills and work experience to get **skill radar charts, learning roadmaps, job matching, interview practice, and portfolio organization** — all in one place.
+Enter your skills and work experience (in Japanese) and get **skill radar charts, learning roadmaps, job matching, interview practice, and portfolio summaries** — all in one place.
 
-📖 [日本語版](./README.md)
+- 🌐 **Live demo**: <https://ai-skill-map-generator.vercel.app>
+- 📱 **PWA**: installable on Android / iOS home screen (Add to Home Screen)
+- 🔐 **Auth**: email & password + Google Sign-In (Supabase Auth)
+- 📖 **Japanese README**: [README.md](./README.md)
 
 ---
 

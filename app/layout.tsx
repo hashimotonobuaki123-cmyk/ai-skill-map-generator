@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { AuthButton } from "@/components/AuthButton";
+import { PwaRegister } from "@/components/PwaRegister";
 import { ToastProvider } from "@/components/ui/toast";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import Link from "next/link";
@@ -97,6 +98,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="apple-mobile-web-app-title" content="Skill Map" />
       </head>
       <body className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50/30 text-foreground antialiased">
+        <PwaRegister />
         <ToastProvider>
           <ErrorBoundary>
             {/* Decorative background elements */}
