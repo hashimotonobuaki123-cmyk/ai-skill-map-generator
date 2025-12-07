@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
+export const dynamic = "force-dynamic";
+
 const featureKeys = ["inventory", "roadmap", "jobMatch"] as const;
 
 const roleKeys = ["planning", "frontend", "backend", "testing", "design"] as const;

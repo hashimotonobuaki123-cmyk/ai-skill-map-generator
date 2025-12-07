@@ -2,6 +2,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
+export const dynamic = "force-dynamic";
+
 const sectionKeys = ["provision", "data", "disclaimer", "contact"] as const;
 
 const icons: Record<(typeof sectionKeys)[number], string> = {

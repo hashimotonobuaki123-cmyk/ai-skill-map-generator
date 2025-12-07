@@ -1,15 +1,20 @@
 import type { ReactNode } from "react";
-import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
+import dynamic from "next/dynamic";
 import "./globals.css";
 import { AuthButton } from "@/components/AuthButton";
 import { PwaRegister } from "@/components/PwaRegister";
 import { ToastProvider } from "@/components/ui/toast";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { LanguageSwitcher } from "@/src/components/LanguageSwitcher";
 import { AppLogo } from "@/components/AppLogo";
 import Link from "next/link";
 import Script from "next/script";
+
+// LanguageSwitcher は usePathname を使うため、SSR を無効にして動的インポート
+const LanguageSwitcher = dynamic(
+  () => import("@/src/components/LanguageSwitcher").then((mod) => mod.LanguageSwitcher),
+  { ssr: false, loading: () => <div className="w-12 h-9" /> }
+);
 
 // メタデータ（OGP対応）
 export const metadata: Metadata = {
@@ -150,9 +155,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     </nav>
 
                     {/* 言語切り替えボタン（DocuFlow 風のコンパクト表示） */}
-                    <Suspense fallback={null}>
-                      <LanguageSwitcher compact />
-                    </Suspense>
+                    <LanguageSwitcher compact />
 
                     <AuthButton />
                   </div>

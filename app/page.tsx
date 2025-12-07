@@ -3,6 +3,9 @@ import { getTranslations } from "next-intl/server";
 import { SkillForm } from "@/components/SkillForm";
 import { DemoGuideBanner } from "@/components/DemoGuideBanner";
 
+// 静的生成を無効化（next-intl が headers を使用するため）
+export const dynamic = "force-dynamic";
+
 interface HomePageProps {
   searchParams?: { [key: string]: string | string[] | undefined };
 }

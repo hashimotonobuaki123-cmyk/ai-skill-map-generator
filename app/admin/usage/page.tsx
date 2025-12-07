@@ -1,6 +1,6 @@
-"use server";
-
 import { createSupabaseClient } from "@/lib/supabaseClient";
+
+export const dynamic = "force-dynamic";
 
 type UsageRow = {
   event: string | null;

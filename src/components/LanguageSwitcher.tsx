@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import type { Locale } from "@/src/i18n/config";
 import { locales } from "@/src/i18n/config";
@@ -16,7 +16,6 @@ interface LanguageSwitcherProps {
 
 export function LanguageSwitcher({ compact = false, className }: LanguageSwitcherProps) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   if (!pathname) return null;
 
@@ -44,8 +43,7 @@ export function LanguageSwitcher({ compact = false, className }: LanguageSwitche
       }
     }
 
-    const qs = searchParams?.toString();
-    return qs ? `${basePath}?${qs}` : basePath;
+    return basePath;
   };
 
   // コンパクトモード: 現在の言語以外の言語ボタンを1つだけ表示

@@ -1,3 +1,7 @@
+const createNextIntlPlugin = require('next-intl/plugin');
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -12,9 +16,11 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
 
-  // experimental機能（Next.js 15向け）
+  // experimental機能
   experimental: {
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
+    // CSR バイアウトエラーを無視（静的生成時のusePathname問題を回避）
+    missingSuspenseWithCSRBailout: false,
   },
 
   // Webpack設定
@@ -89,6 +95,6 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);
 
 

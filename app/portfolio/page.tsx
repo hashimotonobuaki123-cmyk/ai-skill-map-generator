@@ -1,6 +1,8 @@
 import { PortfolioGeneratorSection } from "@/components/PortfolioGeneratorSection";
 import { getTranslations } from "next-intl/server";
 
+export const dynamic = "force-dynamic";
+
 export default async function PortfolioPage() {
   const t = await getTranslations("portfolio.hero");
 
