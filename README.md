@@ -11,8 +11,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/hashimotonobuaki123-cmyk/ai-skill-map-generator/actions/workflows/ci.yml">
-    <img src="https://github.com/hashimotonobuaki123-cmyk/ai-skill-map-generator/actions/workflows/ci.yml/badge.svg" alt="CI" />
+  <a href="https://github.com/AyumuKobayashiproducts/ai-skill-map-generator/actions/workflows/ci.yml">
+    <img src="https://github.com/AyumuKobayashiproducts/ai-skill-map-generator/actions/workflows/ci.yml/badge.svg" alt="CI" />
   </a>
   <img src="https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js" alt="Next.js 15" />
   <img src="https://img.shields.io/badge/TypeScript-5.6-blue?style=flat-square&logo=typescript" alt="TypeScript" />
@@ -190,7 +190,7 @@ flowchart LR
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/hashimotonobuaki123-cmyk/ai-skill-map-generator.git
+git clone https://github.com/AyumuKobayashiproducts/ai-skill-map-generator.git
 cd ai-skill-map-generator
 
 # 依存関係をインストール
@@ -292,5 +292,5 @@ MIT License - see the [LICENSE](LICENSE) file for details.
 ---
 
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/hashimotonobuaki123-cmyk">hashimotonobuaki123-cmyk</a>
+  Made with ❤️ by <a href="https://github.com/AyumuKobayashiproducts">AyumuKobayashiproducts</a>
 </p>

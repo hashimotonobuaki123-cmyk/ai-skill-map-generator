@@ -112,7 +112,7 @@
         - generic [ref=e98]:
           - generic [ref=e101]: AI Skill Map Generator
           - link "GitHubリポジトリを開く（新しいタブ）" [ref=e102] [cursor=pointer]:
-            - /url: https://github.com/hashimotonobuaki123-cmyk/ai-skill-map-generator
+            - /url: https://github.com/AyumuKobayashiproducts/ai-skill-map-generator
             - img [ref=e103]
             - text: GitHub
         - paragraph [ref=e105]: © 2025 All rights reserved.

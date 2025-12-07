@@ -183,13 +183,13 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                href="https://github.com/hashimotonobuaki123-cmyk/ai-skill-map-generator/discussions"
+                href="https://github.com/AyumuKobayashiproducts/ai-skill-map-generator/discussions"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-600 text-white text-xs md:text-sm font-medium shadow-sm hover:bg-sky-700 transition-colors"
               >
                 💬 GitHub Discussions を開く
               </Link>
               <Link
-                href="https://github.com/hashimotonobuaki123-cmyk/ai-skill-map-generator/issues/new/choose"
+                href="https://github.com/AyumuKobayashiproducts/ai-skill-map-generator/issues/new/choose"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs md:text-sm text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 🐛 Issue / Feature リクエストを作成

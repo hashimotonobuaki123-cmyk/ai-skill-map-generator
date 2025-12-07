@@ -193,7 +193,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                         </span>
                       </div>
                       <a
-                        href="https://github.com/hashimotonobuaki123-cmyk/ai-skill-map-generator"
+                        href="https://github.com/AyumuKobayashiproducts/ai-skill-map-generator"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-sky-400 rounded"

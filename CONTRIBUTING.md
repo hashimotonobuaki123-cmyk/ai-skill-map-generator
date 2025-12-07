@@ -13,7 +13,7 @@
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/hashimotonobuaki123-cmyk/ai-skill-map-generator.git
+git clone https://github.com/AyumuKobayashiproducts/ai-skill-map-generator.git
 cd ai-skill-map-generator
 
 # 依存関係をインストール
