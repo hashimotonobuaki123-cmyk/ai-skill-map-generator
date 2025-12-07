@@ -69,3 +69,4 @@
 3. **AI 機能の拡張**: Azure OpenAI / Google Vertex AI 対応、カスタムルール定義
 4. **チーム開発想定の機能**: GitHub Discussions でのフィードバック収集、コントリビューター向けドキュメント整備
 
+

@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for usageLogger.ts</title>
+    <title>Code coverage report for lib/supabaseClient.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> usageLogger.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">lib</a> supabaseClient.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>0/26</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>0/26</span>
             </div>
         
             
@@ -86,7 +86,17 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -109,26 +119,31 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { postJson } from "@/lib/apiClient";</span></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { createClient } from "@supabase/supabase-js";</span></span></span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >type UsageMeta = Record&lt;string, unknown&gt;;</span>
+<span class="cstat-no" title="statement not covered" >const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;</span>
+<span class="cstat-no" title="statement not covered" >const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >// 失敗しても UI には影響させない、ベストエフォートのログ送信</span>
-<span class="cstat-no" title="statement not covered" >export async function logUsage(event: string, meta?: UsageMeta) {</span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    await postJson&lt;</span>
-<span class="cstat-no" title="statement not covered" >      {</span>
-<span class="cstat-no" title="statement not covered" >        event: string;</span>
-<span class="cstat-no" title="statement not covered" >        meta?: UsageMeta;</span>
-<span class="cstat-no" title="statement not covered" >      },</span>
-<span class="cstat-no" title="statement not covered" >      { ok: true }</span>
-<span class="cstat-no" title="statement not covered" >    &gt;("/api/usage-log", {</span>
-<span class="cstat-no" title="statement not covered" >      event,</span>
-<span class="cstat-no" title="statement not covered" >      meta</span>
-<span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" >  } catch {</span>
-<span class="cstat-no" title="statement not covered" >    // ログ送信エラーは握りつぶす</span>
+<span class="cstat-no" title="statement not covered" >if (!supabaseUrl || !supabaseAnonKey) {</span>
+<span class="cstat-no" title="statement not covered" >  // 開発時に気づきやすいようにログを出す</span>
+<span class="cstat-no" title="statement not covered" >  console.warn(</span>
+<span class="cstat-no" title="statement not covered" >    "Supabase の環境変数 NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY が設定されていません。"</span>
+<span class="cstat-no" title="statement not covered" >  );</span>
+<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >// サーバーコンポーネント/Route Handlers から使う簡易クライアント</span>
+<span class="cstat-no" title="statement not covered" >export function createSupabaseClient() {</span>
+<span class="cstat-no" title="statement not covered" >  if (!supabaseUrl || !supabaseAnonKey) {</span>
+<span class="cstat-no" title="statement not covered" >    throw new Error(</span>
+<span class="cstat-no" title="statement not covered" >      "Supabase クライアントを初期化できません。環境変数を確認してください。"</span>
+<span class="cstat-no" title="statement not covered" >    );</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  return createClient(supabaseUrl, supabaseAnonKey, {</span>
+<span class="cstat-no" title="statement not covered" >    auth: {</span>
+<span class="cstat-no" title="statement not covered" >      persistSession: false</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  });</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;
 &nbsp;
@@ -139,16 +154,16 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-05T11:09:14.839Z
+                at 2025-12-05T23:49:46.769Z
             </div>
-        <script src="prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="sorter.js"></script>
-        <script src="block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     
