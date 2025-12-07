@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type {
   OneOnOneFeedback,
   OneOnOneQuestions,
-  SkillMapResult
+  SkillMapResult,
+  InterviewSessionSummary,
+  InterviewSessionRecord
 } from "@/types/skill";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -48,6 +50,37 @@ export function OneOnOnePracticeSection({
   const [questionsLoading, setQuestionsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [interviewType, setInterviewType] = useState<InterviewType>("general");
+  const [exchanges, setExchanges] = useState<
+    { question: string; answer: string; feedback: string }[]
+  >([]);
+  const [sessionSummary, setSessionSummary] =
+    useState<InterviewSessionSummary | null>(null);
+  const [savingSession, setSavingSession] = useState(false);
+  const [sessions, setSessions] = useState<InterviewSessionRecord[]>([]);
+  const [sessionsLoading, setSessionsLoading] = useState(false);
+
+  const loadSessions = useCallback(async () => {
+    try {
+      setSessionsLoading(true);
+      const res = await fetch(
+        `/api/oneonone/sessions?skillMapId=${encodeURIComponent(
+          result.id
+        )}&limit=5`,
+        { cache: "no-store" }
+      );
+      if (!res.ok) {
+        throw new Error("failed to fetch sessions");
+      }
+      const data = (await res.json()) as {
+        sessions?: InterviewSessionRecord[];
+      };
+      setSessions(data.sessions ?? []);
+    } catch (e) {
+      console.error("Failed to load interview sessions", e);
+    } finally {
+      setSessionsLoading(false);
+    }
+  }, [result.id]);
 
   useEffect(() => {
     const loadQuestions = async () => {
@@ -74,6 +107,11 @@ export function OneOnOnePracticeSection({
 
     loadQuestions();
   }, [result.id, interviewType]);
+
+  // セッション履歴読み込み
+  useEffect(() => {
+    void loadSessions();
+  }, [loadSessions]);
 
   const currentQuestion = questions[currentIndex] ?? null;
 
@@ -103,6 +141,10 @@ export function OneOnOnePracticeSection({
         interviewType
       });
       setFeedback(data);
+      setExchanges((prev) => [
+        ...prev,
+        { question: currentQuestion, answer, feedback: data.feedback }
+      ]);
     } catch (e) {
       console.error(e);
       setError(
@@ -119,6 +161,76 @@ export function OneOnOnePracticeSection({
     setCurrentIndex((idx) =>
       idx + 1 < questions.length ? idx + 1 : questions.length - 1
     );
+  };
+
+  const handleSaveSession = async () => {
+    if (!exchanges.length) {
+      setError("少なくとも1問はフィードバックを受けてから保存してください。");
+      return;
+    }
+    setSavingSession(true);
+    setError(null);
+    try {
+      // 1. セッション総評を生成
+      const summary = await postJson<
+        {
+          interviewType: InterviewType;
+          exchanges: { question: string; answer: string; feedback: string }[];
+          strengths?: string;
+          weaknesses?: string;
+        },
+        InterviewSessionSummary
+      >("/api/oneonone/summary", {
+        interviewType,
+        exchanges,
+        strengths: result.strengths,
+        weaknesses: result.weaknesses
+      });
+
+      setSessionSummary(summary);
+
+      // 2. セッションを保存
+      await postJson<
+        {
+          skillMapId: string;
+          interviewType: InterviewType;
+          questionCount: number;
+          overallScore?: number;
+          strongPoints?: string[];
+          improvementPoints?: string[];
+          nextSteps?: string[];
+          summary?: string;
+          exchanges: { question: string; answer: string; feedback: string }[];
+        },
+        { session: InterviewSessionRecord }
+      >("/api/oneonone/sessions", {
+        skillMapId: result.id,
+        interviewType,
+        questionCount: exchanges.length,
+        overallScore: summary.overallScore,
+        strongPoints: summary.strongPoints,
+        improvementPoints: summary.improvementPoints,
+        nextSteps: summary.nextSteps,
+        summary: summary.summary,
+        exchanges
+      });
+
+      void logUsage("oneonone_session_saved", {
+        interviewType,
+        questionCount: exchanges.length,
+        overallScore: summary.overallScore
+      });
+
+      // 3. 履歴を再読み込み
+      void loadSessions();
+    } catch (e) {
+      console.error(e);
+      setError(
+        "セッションの保存に失敗しました。時間をおいてから、もう一度お試しください。"
+      );
+    } finally {
+      setSavingSession(false);
+    }
   };
 
   return (
@@ -328,10 +440,137 @@ export function OneOnOnePracticeSection({
                     </div>
                   </div>
                 </div>
+
+                {/* セッション総評ボタン */}
+                <div className="flex flex-wrap gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={handleSaveSession}
+                    disabled={savingSession || !exchanges.length}
+                  >
+                    {savingSession ? "セッションを保存中..." : "セッションを保存して総評を見る"}
+                  </Button>
+                </div>
+
+                {/* セッション総評表示 */}
+                {sessionSummary && (
+                  <div className="space-y-3 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <p className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+                      <span>📊</span>
+                      今回のセッション総評
+                    </p>
+                    <div className="flex flex-wrap items-center gap-4">
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-2xl font-bold text-violet-600">
+                          {sessionSummary.overallScore}
+                        </span>
+                        <span className="text-xs text-slate-500">/ 5</span>
+                      </div>
+                      <p className="text-xs text-slate-500">
+                        1 が要改善、5 がとても良い状態の目安です。
+                      </p>
+                    </div>
+                    {!!sessionSummary.strongPoints.length && (
+                      <div className="space-y-1">
+                        <p className="text-xs font-semibold text-emerald-700">
+                          良かった点
+                        </p>
+                        <ul className="list-disc list-inside text-xs text-slate-700 space-y-0.5">
+                          {sessionSummary.strongPoints.map((p) => (
+                            <li key={p}>{p}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {!!sessionSummary.improvementPoints.length && (
+                      <div className="space-y-1">
+                        <p className="text-xs font-semibold text-amber-700">
+                          改善すると良い点
+                        </p>
+                        <ul className="list-disc list-inside text-xs text-slate-700 space-y-0.5">
+                          {sessionSummary.improvementPoints.map((p) => (
+                            <li key={p}>{p}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {!!sessionSummary.nextSteps.length && (
+                      <div className="space-y-1">
+                        <p className="text-xs font-semibold text-sky-700">
+                          次回までにやること
+                        </p>
+                        <ul className="list-disc list-inside text-xs text-slate-700 space-y-0.5">
+                          {sessionSummary.nextSteps.map((p) => (
+                            <li key={p}>{p}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {sessionSummary.summary && (
+                      <p className="text-xs text-slate-700 whitespace-pre-wrap leading-relaxed">
+                        {sessionSummary.summary}
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </div>
         )}
+        {/* 履歴一覧 */}
+        <div className="mt-6 border-t border-slate-100 pt-4 space-y-2">
+          <p className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+            <span>🕒</span>
+            過去の 1on1 セッション履歴（直近 5 件）
+          </p>
+          {sessionsLoading ? (
+            <p className="text-xs text-slate-500">読み込み中...</p>
+          ) : sessions.length === 0 ? (
+            <p className="text-xs text-slate-500">
+              まだ保存されたセッションはありません。1問以上フィードバックを受けて「セッションを保存して総評を見る」を押すと、ここに履歴が表示されます。
+            </p>
+          ) : (
+            <ul className="space-y-1.5">
+              {sessions.map((s) => {
+                const created = s.created_at
+                  ? new Date(s.created_at)
+                  : null;
+                return (
+                  <li
+                    key={s.id}
+                    className="text-xs text-slate-700 flex items-center justify-between gap-2"
+                  >
+                    <div className="flex flex-col">
+                      <span className="font-medium">
+                        {s.interview_type ?? "unknown"}
+                      </span>
+                      <span className="text-[10px] text-slate-500">
+                        {created
+                          ? created.toLocaleString("ja-JP", {
+                              month: "2-digit",
+                              day: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit"
+                            })
+                          : "-"}
+                      </span>
+                    </div>
+                    <div className="text-right text-[11px] text-slate-600">
+                      <span className="mr-2">
+                        質問数: {s.question_count ?? "-"}
+                      </span>
+                      <span>
+                        スコア: {s.overall_score ?? "-"}
+                      </span>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
       </CardContent>
     </Card>
   );

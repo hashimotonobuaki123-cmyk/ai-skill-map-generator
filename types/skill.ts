@@ -121,6 +121,43 @@ export interface OneOnOneFeedback {
 }
 
 /**
+ * 1on1 セッション総評結果
+ */
+export interface InterviewSessionSummary {
+  /** 総合スコア (1-5) */
+  overallScore: number;
+  /** 良かった点 */
+  strongPoints: string[];
+  /** 改善点 */
+  improvementPoints: string[];
+  /** 次回までにやること */
+  nextSteps: string[];
+  /** 総評コメント */
+  summary: string;
+}
+
+/**
+ * 1on1 セッション履歴レコード（Supabaseの interview_sessions テーブルに対応）
+ */
+export interface InterviewSessionRecord {
+  id: string;
+  skill_map_id: string | null;
+  interview_type: string | null;
+  question_count: number | null;
+  overall_score: number | null;
+  strong_points: string[] | null;
+  improvement_points: string[] | null;
+  next_steps: string[] | null;
+  summary: string | null;
+  exchanges: {
+    question: string;
+    answer: string;
+    feedback: string;
+  }[] | null;
+  created_at: string;
+}
+
+/**
  * 学習時間シミュレーション結果
  */
 export interface TimeSimulationResult {
