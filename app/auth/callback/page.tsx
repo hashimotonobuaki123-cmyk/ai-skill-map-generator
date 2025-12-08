@@ -4,58 +4,67 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getSupabaseBrowserClient } from "@/lib/supabaseBrowserClient";
 
+/**
+ * Supabase からの OAuth リダイレクトを受け取るコールバック用ページ。
+ *
+ * 以前は数秒メッセージを表示してからトップへ戻していたが、
+ * 「変なロード画面」に見えるため、できるだけすぐ元の画面に戻す。
+ */
 export default function AuthCallbackPage() {
-  const [message, setMessage] = useState("ログイン処理中です...");
   const router = useRouter();
+  const [status, setStatus] = useState<"loading" | "error">("loading");
 
   useEffect(() => {
     const handleAuth = async () => {
       try {
         const supabase = getSupabaseBrowserClient();
-        // すでに Supabase 側でセッションが作られているか確認
+
+        // すでにセッションがあるか確認
         const { data } = await supabase.auth.getUser();
 
+        // 元いた場所に戻すためのパラメータ（なければルートへ）
+        const url = new URL(window.location.href);
+        const redirectTo = url.searchParams.get("redirect_to") ?? "/";
+
         if (data.user) {
-          setMessage("ログインに成功しました。画面を戻ります...");
-          setTimeout(() => {
-            router.push("/");
-          }, 1500);
+          router.replace(redirectTo);
           return;
         }
 
-        // 古いフローで code パラメータ付きで遷移してきた場合のフォールバック
-        const url = new URL(window.location.href);
+        // 古いフローで code パラメータ付きで来た場合のフォールバック
         const code = url.searchParams.get("code");
-
         if (!code) {
-          setMessage("ログインに失敗しました。もう一度お試しください。");
+          setStatus("error");
           return;
         }
 
         const { error } = await supabase.auth.exchangeCodeForSession(code);
-
         if (error) {
           console.error("Auth callback error", error);
-          setMessage("ログインに失敗しました。もう一度お試しください。");
+          setStatus("error");
           return;
         }
 
-        setMessage("ログインに成功しました。画面を戻ります...");
-        setTimeout(() => {
-          router.push("/");
-        }, 1500);
+        router.replace(redirectTo);
       } catch (e) {
         console.error(e);
-        setMessage("予期しないエラーが発生しました。");
+        setStatus("error");
       }
     };
 
-    handleAuth();
+    void handleAuth();
   }, [router]);
 
   return (
     <div className="flex min-h-[200px] items-center justify-center">
-      <p className="text-sm text-slate-700">{message}</p>
+      <div className="flex items-center gap-2 text-sm text-slate-600">
+        <span className="h-4 w-4 border-2 border-sky-500 border-t-transparent rounded-full animate-spin" />
+        <span>
+          {status === "loading"
+            ? "サインイン処理中です..."
+            : "ログインに失敗しました。もう一度お試しください。"}
+        </span>
+      </div>
     </div>
   );
 }

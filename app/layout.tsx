@@ -9,6 +9,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppLogo } from "@/components/AppLogo";
 import Link from "next/link";
 import Script from "next/script";
+import { getLocale, getTranslations } from "next-intl/server";
 
 // LanguageSwitcher は usePathname を使うため、SSR を無効にして動的インポート
 const LanguageSwitcher = dynamic(
@@ -86,19 +87,22 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "#0f172a" }
   ]
 };
+ 
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const locale = await getLocale();
+  const t = await getTranslations("layout");
 
-const navLinks = [
-  { href: "/", key: "home", emoji: "🏠", label: "ホーム" },
-  { href: "/dashboard", key: "dashboard", emoji: "📊", label: "ダッシュボード" },
-  { href: "/about", key: "about", emoji: "ℹ️", label: "このアプリについて" },
-  { href: "/portfolio", key: "portfolio", emoji: "📁", label: "ポートフォリオ整理" },
-  { href: "/legal", key: "legal", emoji: "📜", label: "利用について" }
-] as const;
-
-export default function RootLayout({ children }: { children: ReactNode }) {
+  const basePath = `/${locale}`;
+  const navLinks = [
+    { href: basePath, key: "home", emoji: "🏠", label: t("nav.home") },
+    { href: `${basePath}/dashboard`, key: "dashboard", emoji: "📊", label: t("nav.dashboard") },
+    { href: `${basePath}/about`, key: "about", emoji: "ℹ️", label: t("nav.about") },
+    { href: `${basePath}/portfolio`, key: "portfolio", emoji: "📁", label: t("nav.portfolio") },
+    { href: `${basePath}/legal`, key: "legal", emoji: "📜", label: t("nav.legal") }
+  ] as const;
 
   return (
-    <html lang="ja" className="scroll-smooth">
+    <html lang={locale} className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -128,8 +132,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <a
                 href="#main-content"
                 className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-sky-600 focus:text-white focus:rounded-lg"
+                aria-label={t("aria.skipToMain")}
               >
-                メインコンテンツへスキップ
+                {t("aria.skipToMain")}
               </a>
 
               <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-lg">
@@ -139,10 +144,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
                   <div className="flex items-center gap-2 sm:gap-3">
                     {/* デスクトップナビゲーション */}
-                    <nav
-                      className="hidden md:flex gap-1 text-sm"
-                      aria-label="メインナビゲーション"
-                    >
+                    <nav className="hidden md:flex gap-1 text-sm" aria-label={t("aria.mainNav")}>
                       {navLinks.map((link) => (
                         <Link
                           key={link.href}
@@ -164,7 +166,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 {/* モバイルナビゲーション */}
                 <nav
                   className="md:hidden border-t border-slate-100 bg-white/90"
-                  aria-label="モバイルナビゲーション"
+                  aria-label={t("aria.mobileNav")}
                 >
                   <div className="max-w-5xl mx-auto px-3 py-2 flex gap-1.5 overflow-x-auto">
                     {navLinks.map((link) => (
