@@ -127,7 +127,7 @@ export function SkillForm() {
       });
       clearTimeout(stepTimer1);
       clearTimeout(stepTimer2);
-      router.push(`/result/${data.id}`);
+      router.push(`/${locale}/result/${data.id}`);
     } catch (err: unknown) {
       clearTimeout(stepTimer1);
       clearTimeout(stepTimer2);

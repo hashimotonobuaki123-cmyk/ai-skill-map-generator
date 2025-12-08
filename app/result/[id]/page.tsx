@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { createSupabaseClient } from "@/lib/supabaseClient";
 import { SkillResultView } from "@/components/SkillResultView";
 import type { SkillMapResult } from "@/types/skill";
@@ -15,6 +15,7 @@ interface ResultPageProps {
 
 export default async function ResultPage({ params, searchParams }: ResultPageProps) {
   const t = await getTranslations("result");
+  const locale = await getLocale();
   const supabase = createSupabaseClient();
 
   const { data, error } = await supabase
@@ -57,7 +58,7 @@ export default async function ResultPage({ params, searchParams }: ResultPagePro
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm animate-fade-in">
         <Link 
-          href="/dashboard" 
+          href={`/${locale}/dashboard`} 
           className="text-slate-500 hover:text-slate-700 transition-colors"
         >
           {t("breadcrumb.dashboard")}
@@ -178,28 +179,28 @@ export default async function ResultPage({ params, searchParams }: ResultPagePro
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/dashboard"
+              href={`/${locale}/dashboard`}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-slate-900 font-semibold shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm"
             >
               <span className="text-lg">📊</span>
               {t("nextSteps.quickActions.toDashboard")}
             </Link>
             <Link
-              href="/"
+              href={`/${locale}`}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-semibold shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm"
             >
               <span className="text-lg">✨</span>
               {t("nextSteps.quickActions.again")}
             </Link>
             <Link
-              href="/admin/usage"
+              href={`/${locale}/admin/usage`}
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-white/30 text-white font-medium hover:bg-white/10 transition-colors text-sm"
             >
               <span className="text-lg">📈</span>
               {t("nextSteps.quickActions.usage")}
             </Link>
             <Link
-              href="/about"
+              href={`/${locale}/about`}
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-white/30 text-white font-medium hover:bg-white/10 transition-colors text-sm"
             >
               <span className="text-lg">ℹ️</span>
