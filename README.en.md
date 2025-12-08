@@ -3,13 +3,13 @@
 [![Build Status](https://github.com/AyumuKobayashiproducts/ai-skill-map-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/AyumuKobayashiproducts/ai-skill-map-generator/actions/workflows/ci.yml)
 [![Test](https://img.shields.io/badge/test-vitest%20%2B%20playwright-6E9F18)](https://vitest.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-14-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-Postgres-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> 🎯 An AI-powered skill mapping and career coaching tool for early-career web engineers
+> 🎯 An AI-powered skill mapping and career coaching tool for early-career web engineers.
 
-Enter your skills and work experience (in Japanese) and get **skill radar charts, learning roadmaps, job matching, interview practice, and portfolio summaries** — all in one place.
+Paste in your skills and work experience (in Japanese) and get **skill radar charts, learning roadmaps, job matching, interview practice, and portfolio summaries** — all stitched into a single, coherent flow.
 
 - 🌐 **Live demo**: <https://ai-skill-map-generator.vercel.app>
 - 📱 **PWA**: installable on Android / iOS home screen (Add to Home Screen)
@@ -19,43 +19,51 @@ Enter your skills and work experience (in Japanese) and get **skill radar charts
 
 ---
 
+### What this project says about me
+
+- I design and ship **small, coherent products end‑to‑end**, not just isolated features or throwaway demos.
+- I’m comfortable owning **product thinking, architecture, AI integration and DX/testing** by myself.
+- I care about **how it feels to use** (onboarding, copy, i18n, error states) as much as *what* it does.
+
+---
+
 ### Features
 
 | Feature | Description |
 |---------|-------------|
 | 🗺️ **Skill Map** | Radar chart visualization across 5 categories (Frontend, Backend, Infra, AI, Tools) |
-| 📈 **Learning Roadmap** | 30-day and 90-day personalized learning plans |
-| 💼 **Job Matching** | Match score calculation with job postings + skill gap analysis |
-| ⚠️ **Career Risk Radar** | Visualize obsolescence / over-specialization / automation risks |
-| 🎤 **Interview Practice** | AI-powered mock interviews with 3 types (General, Technical, Behavioral) |
-| 📋 **Portfolio Generator** | Auto-generate portfolio summaries in Markdown/JSON format |
+| 📈 **Learning Roadmap** | 30-day and 90-day personalized learning plans, derived from your current skills and goals |
+| 💼 **Job Matching** | Match score calculation against job posts, plus a clear view of missing / weak skills |
+| ⚠️ **Career Risk Radar** | Visualize obsolescence / over-specialization / automation risks in a simple chart |
+| 🎤 **Interview Practice** | AI-powered mock interviews with 3 types (General, Technical, Behavioral/STAR) |
+| 📋 **Portfolio Generator** | Turn your projects into concise portfolio summaries in Markdown / JSON |
 
 ---
 
 ### Who is this for?
 
 - **Early-career web engineers** preparing for their **first or next job change**
-- Engineers who want a **clear picture of their skills and gaps**, not just a long CV
-- Mentors / career coaches who need a simple tool to **visualize mentees’ growth**
+- Engineers who want a **clear picture of their skills, gaps and roadmap**, not just a long CV
+- Mentors / career coaches who need a simple tool to **visualize mentees’ growth** and suggest next steps
 
 ---
 
 ### Tech Stack
 
 ```
-Frontend:   Next.js 15 (App Router) + React 19 + TypeScript
-Backend:    Next.js API Routes + OpenAI API
-Database:   Supabase (PostgreSQL)
+Frontend:   Next.js 14 (App Router) + React 18 + TypeScript 5.6
+Backend:    Next.js Route Handlers + OpenAI SDK
+Database:   Supabase (PostgreSQL + Auth, RLS)
 Validation: Zod
 Testing:    Vitest (unit) + Playwright (E2E)
-I18n:       next-intl (App Router, locale-based routing)
+I18n:       next-intl (locale-based routing, server + client components)
 Styling:    Tailwind CSS
 CI/CD:      GitHub Actions
 ```
 
 ---
 
-### Production-readiness (What this project demonstrates)
+### Product & engineering depth
 
 This project is intentionally built to look and feel like a **small real-world product**, not just a toy demo:
 
@@ -77,18 +85,32 @@ This project is intentionally built to look and feel like a **small real-world p
     - Event names by feature (diagnosis, job match, 1on1 practice, etc.)
   - Designed as a starting point for data-driven product improvement
 
+- **Internationalization & UX**
+  - Fully bilingual UI (Japanese / English) with locale-aware routing and metadata
+  - All major user flows (Home, Dashboard, Result, Portfolio, Auth, Legal) are translated
+  - API error messages and client-side error handling use consistent error codes and i18n strings
+  - Basic E2E coverage for language switching and translated content with Playwright
+
 - **PWA & Mobile Experience**
   - Installable as a PWA on Android / iOS (Add to Home Screen)
   - Basic offline-friendly behavior via `manifest.json` and a simple `sw.js`
   - Mobile-first layout and touch-friendly controls
+
+---
+
+### If I joined your team, I would add value by…
+
+- Designing and validating **vertical slices** end‑to‑end – from problem framing and UX flows to shipped features.
+- Owning **AI‑powered experiences**: prompt design, failure modes, latency/cost trade‑offs and observability.
+- Raising the bar on **DX and testability**: type‑first design, clear contracts between layers, and pragmatic E2E coverage where it matters.
 
 If you are evaluating this repository as a hiring manager, please see also:
 
 - `docs/testing.md` — testing strategy and CI integration  
 - `docs/accessibility.md` — accessibility considerations  
 - `docs/performance.md` — performance tuning notes  
-- `docs/case-studies.md` — example user stories and before/after narratives
- - `docs/findy-summary.en.md` — 1-page English summary of this project for hiring managers
+- `docs/case-studies.md` — example user stories and before/after narratives  
+- `docs/findy-summary.en.md` — one‑page English summary of this project for hiring managers
 
 ---
 

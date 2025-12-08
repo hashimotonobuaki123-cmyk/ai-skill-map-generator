@@ -73,7 +73,7 @@
       "subtitle": "Not just scores – quickly see how far you’ve progressed on the key preparation items.",
       "items": {
         "resume_updated": "Update your resume with your latest projects",
-        "github_ready": "整理 links to your GitHub / portfolio projects",
+        "github_ready": "Organise links to your GitHub / portfolio projects",
         "job_research": "Pick at least 3 target job posts",
         "interview_practice": "Do at least one 1on1 interview practice in the last 7 days"
       },
@@ -82,6 +82,12 @@
       "levelLabelMedium": "Medium (Can move while preparing)",
       "levelLabelLow": "Low (Focus on foundation first)",
       "readinessLevelLabel": "Readiness level"
+    },
+    "usageGlance": {
+      "title": "Recent usage",
+      "subtitle": "Quick numbers based on your saved diagnoses and 1on1 practice sessions.",
+      "diagnosesLabel": "Diagnoses",
+      "sessionsLabel": "1on1 sessions"
     },
     "retention": {
       "title": "Job preparation reminder",

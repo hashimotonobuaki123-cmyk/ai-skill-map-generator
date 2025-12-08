@@ -427,6 +427,39 @@ export default function DashboardPage() {
         )}
       </div>
 
+      {/* 簡易な利用状況カード */}
+      <div className="rounded-2xl border border-slate-200 bg-gradient-to-r from-slate-50 via-white to-sky-50 p-4 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="flex items-start gap-3">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-500 to-emerald-500 flex items-center justify-center text-white text-lg shadow-md">
+            📈
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-slate-900">
+              {t("usageGlance.title")}
+            </p>
+            <p className="text-[11px] text-slate-600">
+              {t("usageGlance.subtitle")}
+            </p>
+          </div>
+        </div>
+        <div className="flex gap-3 text-[11px] text-slate-700">
+          <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white border border-slate-200 shadow-xs">
+            <span className="text-xs">🗺️</span>
+            <span className="font-semibold">
+              {items.length}
+            </span>
+            <span>{t("usageGlance.diagnosesLabel")}</span>
+          </div>
+          <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white border border-slate-200 shadow-xs">
+            <span className="text-xs">🎤</span>
+            <span className="font-semibold">
+              {interviewSessions.length}
+            </span>
+            <span>{t("usageGlance.sessionsLabel")}</span>
+          </div>
+        </div>
+      </div>
+
       {/* 転職準備チェックリスト */}
       <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm animate-fade-in-up">
         <div className="flex items-center justify-between gap-3 mb-3">

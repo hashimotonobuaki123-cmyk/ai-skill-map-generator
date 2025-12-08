@@ -83,6 +83,12 @@
       "levelLabelLow": "Low（まずは土台固め）",
       "readinessLevelLabel": "転職準備レベル"
     },
+    "usageGlance": {
+      "title": "最近の利用状況",
+      "subtitle": "このアカウントで保存された診断と 1on1 練習セッションの数です。",
+      "diagnosesLabel": "診断",
+      "sessionsLabel": "1on1 セッション"
+    },
     "retention": {
       "title": "転職準備のリマインド",
       "line1": "前回の診断から {days}日 経過しています。",
