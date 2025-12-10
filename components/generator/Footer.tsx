@@ -1,8 +1,11 @@
 "use client";
 
 import { Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function Footer() {
+  const t = useTranslations("generator.footer");
+
   return (
     <footer className="border-t border-[var(--border-primary)] py-12">
       <div className="container-default">
@@ -13,13 +16,13 @@ export function Footer() {
               <Sparkles className="w-3 h-3 text-white" />
             </div>
             <span className="text-sm text-[var(--text-secondary)]">
-              AI Skill Generator
+              {t("title")}
             </span>
           </div>
 
           {/* Tech Stack */}
           <div className="flex items-center gap-4 text-sm text-[var(--text-tertiary)]">
-            <span>Built with</span>
+            <span>{t("builtWith")}</span>
             <div className="flex items-center gap-2">
               <span className="badge badge-default">Next.js 14</span>
               <span className="badge badge-default">TypeScript</span>
@@ -36,4 +39,3 @@ export function Footer() {
     </footer>
   );
 }
-

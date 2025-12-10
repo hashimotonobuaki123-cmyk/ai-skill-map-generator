@@ -2,8 +2,11 @@
 
 import { Sparkles, Github } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export function Header() {
+  const t = useTranslations("generator.header");
+
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-[var(--bg-primary)]/80 border-b border-[var(--border-primary)]">
       <div className="container-wide">
@@ -14,20 +17,20 @@ export function Header() {
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <span className="font-semibold text-[var(--text-primary)] group-hover:text-gradient transition-colors">
-              AI Skill Generator
+              {t("title")}
             </span>
           </Link>
 
           {/* Navigation */}
           <nav className="flex items-center gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/AyumuKobayashiproducts/ai-skill-map-generator"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-ghost btn-sm"
             >
               <Github className="w-4 h-4" />
-              <span className="hidden sm:inline">GitHub</span>
+              <span className="hidden sm:inline">{t("github")}</span>
             </a>
           </nav>
         </div>
@@ -35,4 +38,3 @@ export function Header() {
     </header>
   );
 }
-

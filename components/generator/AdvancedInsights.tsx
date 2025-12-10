@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { AdvancedInsights as AdvancedInsightsType } from "@/types/skillGenerator";
 import { ChevronRight, BookOpen, Clock, Code, FileText } from "lucide-react";
 
@@ -8,6 +9,9 @@ interface AdvancedInsightsProps {
 }
 
 export function AdvancedInsights({ data }: AdvancedInsightsProps) {
+  const t = useTranslations("generator.advanced");
+  const td = useTranslations("generator.difficulty");
+
   return (
     <section className="section" id="advanced">
       <div className="container-default">
@@ -15,7 +19,7 @@ export function AdvancedInsights({ data }: AdvancedInsightsProps) {
           <summary className="text-lg">
             <span className="flex items-center gap-2">
               <ChevronRight className="w-5 h-5 text-[var(--text-tertiary)]" />
-              Advanced Insights
+              {t("title")}
             </span>
           </summary>
           <div className="accordion-content space-y-8 pt-6">
@@ -23,7 +27,7 @@ export function AdvancedInsights({ data }: AdvancedInsightsProps) {
             <div>
               <h3 className="flex items-center gap-2 text-base font-semibold text-[var(--text-primary)] mb-4">
                 <FileText className="w-4 h-4 text-[var(--accent-blue)]" />
-                Score Breakdown
+                {t("scoreBreakdown")}
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {Object.entries(data.scoreBreakdown).map(([skill, info]) => (
@@ -46,7 +50,7 @@ export function AdvancedInsights({ data }: AdvancedInsightsProps) {
             <div>
               <h3 className="flex items-center gap-2 text-base font-semibold text-[var(--text-primary)] mb-4">
                 <BookOpen className="w-4 h-4 text-[var(--accent-green)]" />
-                Learning Roadmap
+                {t("roadmap")}
               </h3>
               <div className="space-y-3">
                 {data.learningRoadmap.map((step, index) => (
@@ -55,7 +59,7 @@ export function AdvancedInsights({ data }: AdvancedInsightsProps) {
                     className="flex items-start gap-4 p-4 glass-card"
                   >
                     <div className="shrink-0 w-10 h-10 rounded-full bg-[var(--bg-tertiary)] flex items-center justify-center text-sm font-semibold text-[var(--text-secondary)]">
-                      W{step.week}
+                      {t("week", { week: step.week })}
                     </div>
                     <div>
                       <p className="font-medium text-[var(--text-primary)]">
@@ -79,13 +83,13 @@ export function AdvancedInsights({ data }: AdvancedInsightsProps) {
             <div className="glass-card p-6">
               <h3 className="flex items-center gap-2 text-base font-semibold text-[var(--text-primary)] mb-2">
                 <Clock className="w-4 h-4 text-[var(--accent-yellow)]" />
-                Estimated Learning Time
+                {t("estimatedTime")}
               </h3>
               <p className="text-4xl font-bold text-gradient">
-                {data.estimatedHours} hours
+                {t("hours", { hours: data.estimatedHours })}
               </p>
               <p className="text-sm text-[var(--text-secondary)] mt-2">
-                to reach your next level across all skills
+                {t("toNextLevel")}
               </p>
             </div>
 
@@ -93,7 +97,7 @@ export function AdvancedInsights({ data }: AdvancedInsightsProps) {
             <div>
               <h3 className="flex items-center gap-2 text-base font-semibold text-[var(--text-primary)] mb-4">
                 <Code className="w-4 h-4 text-[var(--accent-purple)]" />
-                Suggested Practice Projects
+                {t("projects")}
               </h3>
               <div className="grid md:grid-cols-2 gap-4">
                 {data.practiceProjects.map((project, index) => (
@@ -111,7 +115,7 @@ export function AdvancedInsights({ data }: AdvancedInsightsProps) {
                             : "badge-red"
                         }`}
                       >
-                        {project.difficulty}
+                        {td(project.difficulty)}
                       </span>
                     </div>
                     <p className="text-sm text-[var(--text-secondary)] mb-3">
@@ -132,9 +136,9 @@ export function AdvancedInsights({ data }: AdvancedInsightsProps) {
             {/* Long-form Analysis */}
             <div className="glass-card p-6">
               <h3 className="text-base font-semibold text-[var(--text-primary)] mb-4">
-                Detailed Analysis
+                {t("analysis")}
               </h3>
-              <div className="prose prose-invert prose-sm max-w-none">
+              <div className="prose prose-sm max-w-none">
                 <p className="text-[var(--text-secondary)] whitespace-pre-wrap leading-relaxed">
                   {data.longFormAnalysis}
                 </p>
@@ -146,4 +150,3 @@ export function AdvancedInsights({ data }: AdvancedInsightsProps) {
     </section>
   );
 }
-

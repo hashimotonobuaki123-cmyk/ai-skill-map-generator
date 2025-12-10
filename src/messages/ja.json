@@ -909,6 +909,79 @@
       "reload": "ページを再読み込み"
     }
   },
+  "generator": {
+    "header": {
+      "title": "AI スキル ジェネレーター",
+      "github": "GitHub"
+    },
+    "hero": {
+      "badge": "AI によるスキル分析",
+      "title1": "AI スキル",
+      "title2": "ジェネレーター",
+      "subtitle": "あなたのスキルを分析し、AIが実践的なアドバイスを提供します。データに基づいたキャリアアップを実現しましょう。",
+      "getStarted": "始める"
+    },
+    "input": {
+      "title": "あなたのスキル",
+      "description": "スキル名、経験年数、習熟度を入力してください",
+      "loadSample": "サンプルを読み込む",
+      "skillName": "スキル名",
+      "experience": "経験年数",
+      "level": "レベル",
+      "placeholder": "スキル名（例：React）",
+      "addSkill": "+ スキルを追加",
+      "generate": "スキルマップを生成",
+      "generating": "分析中...",
+      "ready": "{count}件のスキルを分析します",
+      "readyPlural": "{count}件のスキルを分析します",
+      "removeSkill": "スキルを削除"
+    },
+    "levels": {
+      "beginner": "初心者",
+      "elementary": "初級",
+      "intermediate": "中級",
+      "advanced": "上級",
+      "expert": "エキスパート"
+    },
+    "years": {
+      "lessThan1": "1年未満",
+      "year": "{n}年",
+      "years": "{n}年",
+      "tenPlus": "10年以上"
+    },
+    "output": {
+      "title": "あなたのスキルマップ",
+      "subtitle": "AIによるスキル分析と成長のためのアドバイス"
+    },
+    "summary": {
+      "strengths": "強み",
+      "weaknesses": "改善点",
+      "nextFocus": "次にフォーカスすべきこと"
+    },
+    "advanced": {
+      "title": "詳細分析",
+      "scoreBreakdown": "スコア内訳",
+      "roadmap": "学習ロードマップ",
+      "estimatedTime": "推定学習時間",
+      "hours": "{hours}時間",
+      "toNextLevel": "全スキルを次のレベルに上げるために必要な時間",
+      "projects": "おすすめ練習プロジェクト",
+      "analysis": "詳細分析",
+      "week": "{week}週目"
+    },
+    "difficulty": {
+      "beginner": "初心者向け",
+      "intermediate": "中級者向け",
+      "advanced": "上級者向け"
+    },
+    "footer": {
+      "title": "AI スキル ジェネレーター",
+      "builtWith": "使用技術"
+    },
+    "error": {
+      "generic": "エラーが発生しました。もう一度お試しください。"
+    }
+  },
   "auth": {
     "login": {
       "titleLogin": "おかえりなさい",

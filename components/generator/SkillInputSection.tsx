@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Plus, Sparkles, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { SkillInput, SAMPLE_SKILLS } from "@/types/skillGenerator";
 import { SkillRow } from "./SkillRow";
 
@@ -15,6 +16,7 @@ function generateId(): string {
 }
 
 export function SkillInputSection({ onGenerate, isGenerating }: SkillInputSectionProps) {
+  const t = useTranslations("generator.input");
   const [skills, setSkills] = useState<SkillInput[]>([
     { id: generateId(), name: "", yearsOfExperience: 1, level: 3 },
   ]);
@@ -55,10 +57,10 @@ export function SkillInputSection({ onGenerate, isGenerating }: SkillInputSectio
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-xl font-semibold text-[var(--text-primary)]">
-                Your Skills
+                {t("title")}
               </h2>
               <p className="text-sm text-[var(--text-secondary)] mt-1">
-                Add your skills with experience and proficiency level
+                {t("description")}
               </p>
             </div>
             <button
@@ -66,7 +68,7 @@ export function SkillInputSection({ onGenerate, isGenerating }: SkillInputSectio
               onClick={handleLoadSample}
               className="btn btn-ghost btn-sm"
             >
-              Load Sample
+              {t("loadSample")}
             </button>
           </div>
 
@@ -74,14 +76,14 @@ export function SkillInputSection({ onGenerate, isGenerating }: SkillInputSectio
           <div className="space-y-3">
             {/* Column Headers */}
             <div className="flex items-center gap-3 px-3 text-xs font-medium uppercase tracking-wider text-[var(--text-tertiary)]">
-              <div className="flex-1">Skill Name</div>
-              <div className="w-24 shrink-0 text-center">Experience</div>
-              <div className="w-32 shrink-0 text-center">Level</div>
-              <div className="w-8"></div>
+              <div className="flex-1">{t("skillName")}</div>
+              <div className="w-24 shrink-0 text-center">{t("experience")}</div>
+              <div className="w-32 shrink-0 text-center">{t("level")}</div>
+              <div className="w-8" />
             </div>
 
             {/* Skill Rows */}
-            {skills.map((skill, index) => (
+            {skills.map((skill) => (
               <SkillRow
                 key={skill.id}
                 skill={skill}
@@ -99,7 +101,7 @@ export function SkillInputSection({ onGenerate, isGenerating }: SkillInputSectio
             className="w-full btn btn-secondary btn-md justify-center gap-2 border-dashed"
           >
             <Plus className="w-4 h-4" />
-            Add Skill
+            {t("addSkill")}
           </button>
 
           {/* Generate Button */}
@@ -112,18 +114,20 @@ export function SkillInputSection({ onGenerate, isGenerating }: SkillInputSectio
               {isGenerating ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
-                  Analyzing Skills...
+                  {t("generating")}
                 </>
               ) : (
                 <>
                   <Sparkles className="w-5 h-5" />
-                  Generate Skill Map
+                  {t("generate")}
                 </>
               )}
             </button>
             {validSkillCount > 0 && !isGenerating && (
               <p className="text-center text-sm text-[var(--text-tertiary)] mt-3">
-                {validSkillCount} skill{validSkillCount !== 1 ? "s" : ""} ready for analysis
+                {validSkillCount === 1 
+                  ? t("ready", { count: validSkillCount })
+                  : t("readyPlural", { count: validSkillCount })}
               </p>
             )}
           </div>
@@ -132,4 +136,3 @@ export function SkillInputSection({ onGenerate, isGenerating }: SkillInputSectio
     </section>
   );
 }
-

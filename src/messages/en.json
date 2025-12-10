@@ -909,6 +909,79 @@
       "reload": "Reload page"
     }
   },
+  "generator": {
+    "header": {
+      "title": "AI Skill Generator",
+      "github": "GitHub"
+    },
+    "hero": {
+      "badge": "AI-Powered Skill Analysis",
+      "title1": "AI Skill",
+      "title2": "Generator",
+      "subtitle": "Understand your skills and get actionable AI-powered insights. Transform your career with data-driven recommendations.",
+      "getStarted": "Get Started"
+    },
+    "input": {
+      "title": "Your Skills",
+      "description": "Add your skills with experience and proficiency level",
+      "loadSample": "Load Sample",
+      "skillName": "Skill Name",
+      "experience": "Experience",
+      "level": "Level",
+      "placeholder": "Skill name (e.g., React)",
+      "addSkill": "+ Add Skill",
+      "generate": "Generate Skill Map",
+      "generating": "Analyzing Skills...",
+      "ready": "{count} skill ready for analysis",
+      "readyPlural": "{count} skills ready for analysis",
+      "removeSkill": "Remove skill"
+    },
+    "levels": {
+      "beginner": "Beginner",
+      "elementary": "Elementary",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "expert": "Expert"
+    },
+    "years": {
+      "lessThan1": "<1 yr",
+      "year": "{n} yr",
+      "years": "{n} yrs",
+      "tenPlus": "10+ yrs"
+    },
+    "output": {
+      "title": "Your Skill Map",
+      "subtitle": "AI-powered analysis of your skills and actionable insights for growth"
+    },
+    "summary": {
+      "strengths": "Strengths",
+      "weaknesses": "Areas to Improve",
+      "nextFocus": "Next Focus"
+    },
+    "advanced": {
+      "title": "Advanced Insights",
+      "scoreBreakdown": "Score Breakdown",
+      "roadmap": "Learning Roadmap",
+      "estimatedTime": "Estimated Learning Time",
+      "hours": "{hours} hours",
+      "toNextLevel": "to reach your next level across all skills",
+      "projects": "Suggested Practice Projects",
+      "analysis": "Detailed Analysis",
+      "week": "W{week}"
+    },
+    "difficulty": {
+      "beginner": "beginner",
+      "intermediate": "intermediate",
+      "advanced": "advanced"
+    },
+    "footer": {
+      "title": "AI Skill Generator",
+      "builtWith": "Built with"
+    },
+    "error": {
+      "generic": "Something went wrong. Please try again."
+    }
+  },
   "auth": {
     "login": {
       "titleLogin": "Welcome back",

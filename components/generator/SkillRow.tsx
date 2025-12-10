@@ -1,6 +1,7 @@
 "use client";
 
-import { SkillInput, SKILL_LEVELS } from "@/types/skillGenerator";
+import { useTranslations } from "next-intl";
+import { SkillInput } from "@/types/skillGenerator";
 import { Trash2 } from "lucide-react";
 
 interface SkillRowProps {
@@ -11,6 +12,23 @@ interface SkillRowProps {
 }
 
 export function SkillRow({ skill, onChange, onRemove, canRemove }: SkillRowProps) {
+  const t = useTranslations("generator");
+
+  const levelLabels: Record<number, string> = {
+    1: t("levels.beginner"),
+    2: t("levels.elementary"),
+    3: t("levels.intermediate"),
+    4: t("levels.advanced"),
+    5: t("levels.expert"),
+  };
+
+  const getYearLabel = (years: number): string => {
+    if (years === 0) return t("years.lessThan1");
+    if (years === 10) return t("years.tenPlus");
+    if (years === 1) return t("years.year", { n: years });
+    return t("years.years", { n: years });
+  };
+
   return (
     <div className="skill-row group animate-fade-in-up">
       {/* Skill Name */}
@@ -19,7 +37,7 @@ export function SkillRow({ skill, onChange, onRemove, canRemove }: SkillRowProps
           type="text"
           value={skill.name}
           onChange={(e) => onChange({ ...skill, name: e.target.value })}
-          placeholder="Skill name (e.g., React)"
+          placeholder={t("input.placeholder")}
           className="input"
         />
       </div>
@@ -33,7 +51,7 @@ export function SkillRow({ skill, onChange, onRemove, canRemove }: SkillRowProps
         >
           {[...Array(11)].map((_, i) => (
             <option key={i} value={i}>
-              {i === 0 ? "<1 yr" : i === 10 ? "10+ yrs" : `${i} ${i === 1 ? "yr" : "yrs"}`}
+              {getYearLabel(i)}
             </option>
           ))}
         </select>
@@ -48,7 +66,7 @@ export function SkillRow({ skill, onChange, onRemove, canRemove }: SkillRowProps
         >
           {([1, 2, 3, 4, 5] as const).map((level) => (
             <option key={level} value={level}>
-              {SKILL_LEVELS[level].label}
+              {levelLabels[level]}
             </option>
           ))}
         </select>
@@ -60,11 +78,10 @@ export function SkillRow({ skill, onChange, onRemove, canRemove }: SkillRowProps
         onClick={onRemove}
         disabled={!canRemove}
         className="btn btn-ghost btn-sm opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0"
-        aria-label="Remove skill"
+        aria-label={t("input.removeSkill")}
       >
         <Trash2 className="w-4 h-4 text-[var(--text-tertiary)]" />
       </button>
     </div>
   );
 }
-

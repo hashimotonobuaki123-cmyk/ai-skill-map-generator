@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { TrendingUp, AlertTriangle, Target, LucideIcon } from "lucide-react";
 import { SummaryItem } from "@/types/skillGenerator";
 
@@ -11,30 +12,31 @@ interface SummaryCardProps {
 const CONFIG: Record<
   SummaryCardProps["type"],
   {
-    title: string;
+    titleKey: string;
     icon: LucideIcon;
     className: string;
   }
 > = {
   strengths: {
-    title: "Strengths",
+    titleKey: "strengths",
     icon: TrendingUp,
     className: "summary-card-strength",
   },
   weaknesses: {
-    title: "Areas to Improve",
+    titleKey: "weaknesses",
     icon: AlertTriangle,
     className: "summary-card-weakness",
   },
   nextFocus: {
-    title: "Next Focus",
+    titleKey: "nextFocus",
     icon: Target,
     className: "summary-card-focus",
   },
 };
 
 export function SummaryCard({ type, items }: SummaryCardProps) {
-  const { title, icon: Icon, className } = CONFIG[type];
+  const t = useTranslations("generator.summary");
+  const { titleKey, icon: Icon, className } = CONFIG[type];
 
   return (
     <div className={`summary-card ${className} animate-fade-in-up`}>
@@ -42,7 +44,7 @@ export function SummaryCard({ type, items }: SummaryCardProps) {
         <Icon className="w-5 h-5" />
       </div>
       <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
-        {title}
+        {t(titleKey)}
       </h3>
       <ul className="space-y-3">
         {items.map((item, index) => (
@@ -64,4 +66,3 @@ export function SummaryCard({ type, items }: SummaryCardProps) {
     </div>
   );
 }
-
