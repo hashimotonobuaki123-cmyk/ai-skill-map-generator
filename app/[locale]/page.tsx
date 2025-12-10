@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useParams } from "next/navigation";
 import {
   Header,
   Footer,
@@ -8,10 +9,12 @@ import {
   SkillInputSection,
   OutputSection,
   AdvancedInsights,
+  LocaleProvider,
 } from "@/components/generator";
 import { SkillInput, SkillMapOutput } from "@/types/skillGenerator";
+import { Locale } from "@/src/i18n/config";
 
-export default function LocaleHomePage() {
+function LocaleHomePageContent() {
   const [result, setResult] = useState<SkillMapOutput | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -86,5 +89,16 @@ export default function LocaleHomePage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function LocaleHomePage() {
+  const params = useParams();
+  const locale = (params?.locale as Locale) || "ja";
+
+  return (
+    <LocaleProvider initialLocale={locale}>
+      <LocaleHomePageContent />
+    </LocaleProvider>
   );
 }

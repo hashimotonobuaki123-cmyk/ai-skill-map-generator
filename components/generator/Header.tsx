@@ -3,9 +3,12 @@
 import { Sparkles, Github } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { LanguageToggle } from "./LanguageToggle";
+import { useLocale } from "./LocaleProvider";
 
 export function Header() {
   const t = useTranslations("generator.header");
+  const { locale, toggleLocale } = useLocale();
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-[var(--bg-primary)]/80 border-b border-[var(--border-primary)]">
@@ -22,7 +25,11 @@ export function Header() {
           </Link>
 
           {/* Navigation */}
-          <nav className="flex items-center gap-4">
+          <nav className="flex items-center gap-3">
+            {/* Language Toggle */}
+            <LanguageToggle locale={locale} onToggle={toggleLocale} />
+            
+            {/* GitHub Link */}
             <a
               href="https://github.com/AyumuKobayashiproducts/ai-skill-map-generator"
               target="_blank"

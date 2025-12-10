@@ -9,4 +9,6 @@ export { SummaryCard } from "./SummaryCard";
 export { SummaryGrid } from "./SummaryGrid";
 export { OutputSection } from "./OutputSection";
 export { AdvancedInsights } from "./AdvancedInsights";
+export { LanguageToggle } from "./LanguageToggle";
+export { LocaleProvider, useLocale } from "./LocaleProvider";
 
